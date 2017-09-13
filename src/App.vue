@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view></router-view>
   </div>
 </template>
@@ -10,7 +9,7 @@ import {mapState} from "vuex";
 export default {
   name: "app",
   created() {
-    this.$store.dispatch("Action");
+    // this.$store.dispatch("Action");
   }
 }
 </script>
@@ -23,5 +22,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 100vh;
+  width: 100vw;
 }
 </style>

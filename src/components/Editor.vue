@@ -16,6 +16,8 @@
 <script>
 import * as brace from 'brace'
 import 'brace/mode/javascript';
+import 'brace/mode/html';
+import 'brace/mode/css';
 import 'brace/theme/monokai';
 
 export default {
@@ -34,21 +36,21 @@ export default {
   	this.editorHTML.getSession().setMode('ace/mode/html');
   	this.editorHTML.setTheme('ace/theme/monokai');
     this.editorHTML.on("change", () => {
-      this.editorHTML = this.editorHTML.getValue();
+      // this.editorHTML = this.editorHTML.getValue();
       this.calculate();
     }); 
     this.editorCSS = ace.edit('editor-css')
     this.editorCSS.getSession().setMode('ace/mode/css');
     this.editorCSS.setTheme('ace/theme/monokai');
     this.editorCSS.on("change", () => {
-      this.editorCSS = this.editorCSS.getValue();
+      // this.editorCSS = this.editorCSS.getValue();
       this.calculate();
     }); 
     this.editorJS = ace.edit('editor-js')
     this.editorJS.getSession().setMode('ace/mode/javascript');
     this.editorJS.setTheme('ace/theme/monokai');
     this.editorJS.on("change", () => {
-      this.editorJS = this.editorJS.getValue();
+      // this.editorJS = this.editorJS.getValue();
       this.calculate();
     }); 
   },
@@ -57,7 +59,7 @@ export default {
       console.log("Inside calculate", this.editorJS);
       // this.result = eval(`${this.editorJS}`)
       console.log("result", this.result)
-      this.$el.querySelector("iframe").srcdoc = `<div>hey</div><style>c.value</style><script>j.value<\/script>`
+      this.$el.querySelector("iframe").srcdoc = `${this.editorHTML.getValue()}<style>${this.editorCSS.getValue()}</style><script>${this.editorJS.getValue()}<\/script>`
     },
     changeEditor(newEditor) {
       this.currentEditor = newEditor;
@@ -70,24 +72,29 @@ export default {
 <style scoped>
 
   #work-files {
-    height: 75%;
+    height: 100%;
     width: 10%;
     background: blue;
+  }
+
+  #work-files > button {
+    width: 100%;
+    padding-top: none;
   }
 	#editor-container {
 		height: 75%;
 		width: 100%;
     display: flex;
 	}
-	#editor, #editor2, #editor3 {
+	#editor-html, #editor-js, #editor-css {
 		height: 100%;
-		/*width: 100px;*/
+		width: 100px;
 		width: 50%;
 	}
 
   #editor-results {
-    height: 75%;
-    width: 20%;
+    height: 100%;
+    width: 30%;
     background: white;
   }
 </style>
